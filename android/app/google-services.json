@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "625178649893",
+    "firebase_url": "https://labout-setu.firebaseio.com",
+    "project_id": "labout-setu",
+    "storage_bucket": "labout-setu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625178649893:android:eec476c658a5e81e8d66cc",
+        "android_client_info": {
+          "package_name": "com.exemple"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625178649893-l8jm36ma3d2ufjlrgfo55rj37eom4526.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.exemple",
+            "certificate_hash": "e791990cba7bc705a1e2df3006057323955686ca"
+          }
+        },
+        {
+          "client_id": "625178649893-4a4cl4csurenkr0m2kkkkv6qi44t9dh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwh1i9iMnENa2JKIlSdV3rjNjFdvcnku4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625178649893-4a4cl4csurenkr0m2kkkkv6qi44t9dh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
