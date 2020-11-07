@@ -5,12 +5,31 @@ import Videocall from './src/screens/Videocall';
 import {Styles,Constants, dimen,Colors} from './src/Constants';
 import TextBox from './src/components/TextBox';
 import SubmitButton from './src/components/SubmitButton';
+import auth from '@react-native-firebase/auth';
+import Login from './src/screens/Login';
+
 
 function App() {
+  const [user, setUser] = useState( auth().currentUser);
   const [done,setDone] = useState(false); 
   const [email,setEmail] = useState('');
   const [name,setName]= useState('');
   const edit = false;
+
+  useEffect(()=>{
+    const suser = auth().onAuthStateChanged(onAuthStateChanged);
+
+  },[]);
+
+
+
+  
+  onAuthStateChanged = (user) => {
+    setUser(user);
+    //console.log(user);
+
+  }
+
 
 
   function validateEmail() 
@@ -38,6 +57,9 @@ function App() {
             Alert.alert('Invalid mail','Please enter a valid email ID');
         }
     }
+
+  if(user == null )
+      return(<Login authChanged={onAuthStateChanged}/>)
 
   
 
