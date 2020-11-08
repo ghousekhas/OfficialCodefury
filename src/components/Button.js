@@ -1,6 +1,5 @@
 import React from 'react';
 import {Text,View,StyleSheet,TextInput, Dimensions} from 'react-native';
-import { Defs } from 'react-native-svg';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {Colors} from '../Constants'
 

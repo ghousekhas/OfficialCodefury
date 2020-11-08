@@ -2,12 +2,13 @@ import React from 'react';
 import {Text,View,StyleSheet,TextInput, Dimensions} from 'react-native';
 import {Colors,dimen,TextSpinnerBoxStyles} from '../Constants';
 
-const TextBox = ({title,hint,icon,changeText,defaultValue}) => {
+const TextBox = ({title,hint,icon,changeText,defaultValue,password=false}) => {
     return(<View style={style.mainContainer}>
        <Text style={style.text}>{title}</Text>
        <View style={style.answer}>
        <TextInput style={style.input} 
        defaultValue={defaultValue}
+       secureTextEntry={password}
        placeholder={hint} onChangeText={changeText}></TextInput>
        <View style={style.icon}>
        </View>

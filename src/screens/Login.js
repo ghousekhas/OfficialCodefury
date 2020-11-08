@@ -1,17 +1,23 @@
 import React,{useState,useEffect} from 'react';
-import {Text,View,StyleSheet,TextInput, Dimensions, Alert} from 'react-native';
+import {Text,View,StyleSheet,TextInput, Dimensions, Alert,ScrollView} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import SubmitButton from '../components/SubmitButton';
 import auth from '@react-native-firebase/auth';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
-import {Colors} from '../Constants'
+import {Colors,dimen,Styles} from '../Constants';
+import firestore from '@react-native-firebase/firestore';
+import TextBox from '../components/TextBox';
 
-const LoginScreen = ({navigation,route,authChanged}) => {
+const LoginScreen = ({navigation,route,authChanged,setFactory,setFacName}) => {
     const [phoneno,setPhoneno] = useState(' ');
     const [confirm,setConfirm] = useState(null);
     const [code,setCode] =useState(' ');
     const [user,setUser] =useState(null);
     const [timeout,stmots]=useState(60);
+    const [click,setClick]=useState(0);
+    const [fac,setFac]=useState(false);
+    const [email,setEmail] = useState('');
+    const [name,setName]= useState('');
 
     const [pressed,setPressed] = useState(false);
 
@@ -70,6 +76,47 @@ const LoginScreen = ({navigation,route,authChanged}) => {
         }
     }
 
+    if(fac)
+    return(<View style={style.mainContainer} >
+        
+     <ScrollView style={{flex: 1,marginVertical: dimen.width/20}}>  
+    <Text style={style.text}>Enter credentials</Text>
+   
+            <View>
+            <TextBox title='Username' defaultValue={name}  hint='Enter your username' changeText={setName}/>
+        <TextBox title='Password' defaultValue={email} hint='Enter your Password ' changeText={setEmail} password={true}/>
+        <View onTouchEnd={()=>{
+        setFac(false);
+    }}>
+        <Text style={{margin: 50}} >GO BACK</Text>
+        </View>
+        </View>
+       
+    <View style={Styles.submitButton}>
+    
+  </View>
+  </ScrollView> 
+  <View style={{marginVertical: 3,backgroundColor: Colors.primary,borderRadius: 7,alignSelf: 'center',position: 'absolute',bottom: 50}} >
+    <SubmitButton text= {'Continue' } onTouch={()=>{
+        firestore().collection('Factories').doc(name)
+            .get().then((value)=>{
+                try{
+                const data = value.data();
+                setFacName(value.id);
+
+                setTimeout(()=>{
+                    setFactory(data);
+                },3000);
+                
+                }
+                catch(error){
+                    Alert('Invalid credentials');
+                }
+            })
+    }}  />
+  </View>
+  </View>);
+
 
 
 
@@ -80,7 +127,7 @@ const LoginScreen = ({navigation,route,authChanged}) => {
 
     if(!confirm){
     return(
-    <View style={LoginScreenStyle.mainContainer}>
+    <View style={LoginScreenStyle.mainContainer} >
         <View style= {{height: '87%',width: '100%'}}>
         <Text style = {LoginScreenStyle.titleStyle}>Mobile Verification</Text>
         <Text style = {LoginScreenStyle.descStyle1}>Please enter your mobile number.</Text>
@@ -94,6 +141,12 @@ const LoginScreen = ({navigation,route,authChanged}) => {
             />
         </View>
         <Text style = {LoginScreenStyle.descStyle2}>Don't worry, your number will not be shared with anyone.</Text>
+        <View style={{margin: 50,alignSelf: 'center',justifyContent: 'center'}} onTouchEnd={()=>{
+            setFac(true);
+
+        }}>
+            <Text> Job provider?</Text>
+        </View>
         </View>
         <View style={LoginScreenStyle.bottom}>
             <SubmitButton styling={pressed} text='Get OTP'

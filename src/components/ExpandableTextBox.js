@@ -1,7 +1,5 @@
 import React from 'react';
 import {Text,View,StyleSheet,TextInput, Dimensions} from 'react-native';
-import { Defs } from 'react-native-svg';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import {FontAwesome5} from '@expo/vector-icons';
 import {Colors,dimen,TextSpinnerBoxStyles} from '../Constants';
 
